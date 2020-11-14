@@ -1,9 +1,15 @@
 # DE1_Term_Project
 
-OPERATIONAL LAYER: Create an operational data layer in MySQL. 
+1. OPERATIONAL LAYER:  
+
+![Operational EER Diagram](https://user-images.githubusercontent.com/69182292/99155560-47c79700-26b9-11eb-9764-193a56c740ef.png)
 
 
-Markup : ![picture alt](http://via.placeholder.com/200x150 "Title is optional")
+
+
+
+
+
 Import a relational data set of your choosing into your local instance. Find a data which makes sense to be transformed in analytical data layer for further analytics. In ideal case, you can use the outcome of HW1.
 
 
