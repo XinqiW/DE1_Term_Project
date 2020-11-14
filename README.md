@@ -21,5 +21,21 @@
 * Get countries with high GDP and low GDP from 2015 and 2016
   * Create views with categorized high GDP countries and low GDP countries.
 
-3. Analytical layer: The following Creating the analytical data store
--- This include ID, country name and all 6 variables at year 2015.
+3. Analytical layer: The following is my analytical layer, which includes ID, country name and all 6 variables at year 2015.
+
+![Project Macro Data](https://user-images.githubusercontent.com/69182292/99156289-0a1a3c80-26c0-11eb-8ec8-34ebc08cc24a.png)
+
+4. ETL Pipeline:
+* Extract: Join tables from population, wokring_age_pop_percentage, unemployment_rate, male_percentage, natural_resources_percentage and GDP at year 2015 for operational layer.
+* Transform: Transform percentage variables into percent by dividing 100, and limit 4 decimals.
+* Load: Finally insert to Analytical_Countries when a trigger is performed: when population table is updated, new data will be updated in the Analytical_Countries table automatically. A message table is also included here.
+* 4 stored procedures here:
+  * Create a procedure that gives the working age population number for any specified country
+  * Create a procedure that gives the unemployed population on any specified countries
+  * Create a procedure that gives the male working population in 2015 across different countries
+  * Create a procedure that gives the total amount of counntries' natural resources in 2015
+  
+  
+5. Data Mart: 2 views are created to categorize countries with high GDP and low GDP in year 2015 and inner join with year 2016 from GDP table.
+
+The final EER diagram looks like this:
