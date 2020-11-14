@@ -39,3 +39,5 @@
 5. Data Mart: 2 views are created to categorize countries with high GDP and low GDP in year 2015 and inner join with year 2016 from GDP table.
 
 The final EER diagram looks like this:
+
+![Final look](https://user-images.githubusercontent.com/69182292/99156613-8d3c9200-26c2-11eb-8f96-cd8086cafae8.png)
