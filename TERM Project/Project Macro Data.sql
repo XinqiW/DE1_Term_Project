@@ -461,6 +461,7 @@ DROP VIEW IF EXISTS High_GDP_Countries;
 	WHERE Analytical_Countries.GDP_2015 > 57642914303
 	ORDER BY GDP_2015 DESC;
 
+SELECT COUNT(*) FROM Countries.high_gdp_countries;
 SELECT * FROM Countries.high_gdp_countries;
     
 DROP VIEW IF EXISTS Low_GDP_Countries;
@@ -475,6 +476,7 @@ AS
 WHERE Analytical_Countries.GDP_2015 < 57642914303 
 ORDER BY GDP_2015 ASC;
 
+SELECT COUNT(*) FROM Countries.low_gdp_countries;
 SELECT * FROM Countries.low_gdp_countries;
 
 
