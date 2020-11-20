@@ -1,9 +1,11 @@
 -- Operational layer
 -- Load dataset GDP
+DROP SCHEMA IF EXISTS Countries;
 SET GLOBAL local_infile = ON; 
-SHOW VARIABLES LIKE "local_infile"
+SHOW VARIABLES LIKE "local_infile";
+
 CREATE SCHEMA Countries;
-Use Countries
+Use Countries;
 drop table if exists GDP;
 Create table GDP
 (ID DOUBLE,
@@ -25,8 +27,9 @@ FOREIGN KEY (Country_Name)references male_percentage(Country_Name),
 FOREIGN KEY (Country_Name)references unemployment_rate(Country_Name),
 FOREIGN KEY (Country_Name)references working_age_pop_percentage(Country_Name));
 
+SHOW VARIABLES LIKE "local_infile";
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/GDP 2010-2017.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/GDP 2010-2017.csv'
 INTO TABLE GDP
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -42,10 +45,10 @@ GDP_y2015 = nullif(@v_y2015, ''),
 GDP_y2016 = nullif(@v_y2016, ''),
 GDP_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.GDP
+SELECT * FROM Countries.GDP;
 
 -- Load dataset population
-drop table if exists population
+drop table if exists population;
 create table population
 (ID DOUBLE,
 Country_Name VARCHAR(255),
@@ -63,7 +66,7 @@ PRIMARY KEY (Country_Name),
 FOREIGN KEY (Country_Name)references working_age_pop_percentage(Country_Name));
 
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/Population 2010-2017.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population 2010-2017.csv'
 INTO TABLE population
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -79,11 +82,11 @@ pop_y2015 = nullif(@v_y2015, ''),
 pop_y2016 = nullif(@v_y2016, ''),
 pop_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.population
+SELECT * FROM Countries.population;
 
 
 -- Load dataset working_age_pop_percentage
-drop table if exists working_age_pop_percentage
+drop table if exists working_age_pop_percentage;
 create table working_age_pop_percentage
 (ID DOUBLE,
 Country_Name VARCHAR(255),
@@ -100,7 +103,7 @@ working_pop_percent_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/Working Age Population in Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Working Age Population in Percentage.csv'
 INTO TABLE working_age_pop_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -116,11 +119,11 @@ working_pop_percent_y2015 = nullif(@v_y2015, ''),
 working_pop_percent_y2016 = nullif(@v_y2016, ''),
 working_pop_percent_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.working_age_pop_percentage
+SELECT * FROM Countries.working_age_pop_percentage;
 
 
 -- Load dataset unemployment_rate
-drop table if exists unemployment_rate
+drop table if exists unemployment_rate;
 create table unemployment_rate
 (ID DOUBLE,
 Country_Name VARCHAR(255),
@@ -136,7 +139,7 @@ unemployment_y2016 DOUBLE,
 unemployment_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/Unemployment Rate.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Unemployment Rate.csv'
 INTO TABLE unemployment_rate
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -152,11 +155,11 @@ unemployment_y2015 = nullif(@v_y2015, ''),
 unemployment_y2016 = nullif(@v_y2016, ''),
 unemployment_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.unemployment_rate
+SELECT * FROM Countries.unemployment_rate;
 
 
 -- Load dataset male_percentage
-drop table if exists male_percentage
+drop table if exists male_percentage;
 create table male_percentage
 (ID DOUBLE,
 Country_Name VARCHAR(255),
@@ -172,7 +175,7 @@ male_percentage_y2016 DOUBLE,
 male_percentage_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/Population Male Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population Male Percentage.csv'
 INTO TABLE male_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -188,11 +191,11 @@ male_percentage_y2015 = nullif(@v_y2015, ''),
 male_percentage_y2016 = nullif(@v_y2016, ''),
 male_percentage_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.male_percentage
+SELECT * FROM Countries.male_percentage;
 
 
 -- Load dataset natural_resources_percentage
-drop table if exists natural_resources_percentage
+drop table if exists natural_resources_percentage;
 create table natural_resources_percentage
 (ID DOUBLE,
 Country_Name VARCHAR(255),
@@ -208,7 +211,7 @@ nr_percentage_y2016 DOUBLE,
 nr_percentage_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/Project/New Data Set/Natural Resources Rent Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Natural Resources Rent Percentage.csv'
 INTO TABLE natural_resources_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -224,7 +227,7 @@ nr_percentage_y2015 = nullif(@v_y2015, ''),
 nr_percentage_y2016 = nullif(@v_y2016, ''),
 nr_percentage_y2017 = nullif(@v_y2017, '');
 
-SELECT * FROM Countries.natural_resources_percentage
+SELECT * FROM Countries.natural_resources_percentage;
 
 -- ANALYTICS:
 -- 1. Q: What is the working age population with population and working age pop percentage in 2015?
@@ -283,11 +286,11 @@ END //
 DELIMITER ;
 
 CALL Createanalyticallayer();
-SELECT * FROM Analytical_Countries
+SELECT * FROM Analytical_Countries;
 
 -- 1. Create a procedure that gives the working age population number for any specified country
 
-USE Countries
+USE Countries;
 DROP PROCEDURE IF EXISTS Getworkingpop;
 
 DELIMITER //
@@ -336,9 +339,7 @@ SELECT @unemployed_pop_2015;
 -- data store Analytical_Countries.
 
 DROP TRIGGER IF EXISTS after_country_update; 
-DROP TRIGGER IF EXISTS after_country_insert;
-DROP TRIGGER IF EXISTS after_country_insert_update;
-DROP TRIGGER IF EXISTS after_country_insert2;
+
 DELIMITER $$
 -- Create the trigger when update on population
 CREATE TRIGGER after_country_update
