@@ -2,6 +2,7 @@
 -- Load dataset GDP
 DROP SCHEMA IF EXISTS Countries;
 SET GLOBAL local_infile = ON; 
+SET FOREIGN_KEY_CHECKS = 0;
 SHOW VARIABLES LIKE "local_infile";
 
 CREATE SCHEMA Countries;
@@ -29,7 +30,7 @@ FOREIGN KEY (Country_Name)references working_age_pop_percentage(Country_Name));
 
 SHOW VARIABLES LIKE "local_infile";
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/GDP 2010-2017.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/GDP_2010_2017.csv'
 INTO TABLE GDP
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -66,7 +67,7 @@ PRIMARY KEY (Country_Name),
 FOREIGN KEY (Country_Name)references working_age_pop_percentage(Country_Name));
 
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population 2010-2017.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population_2010_2017.csv'
 INTO TABLE population
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -103,7 +104,7 @@ working_pop_percent_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Working Age Population in Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Working_Age_Population_in_Percentage.csv'
 INTO TABLE working_age_pop_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -139,7 +140,7 @@ unemployment_y2016 DOUBLE,
 unemployment_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Unemployment Rate.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Unemployment_Rate.csv'
 INTO TABLE unemployment_rate
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -175,7 +176,7 @@ male_percentage_y2016 DOUBLE,
 male_percentage_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population Male Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Population_Male_Percentage.csv'
 INTO TABLE male_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -211,7 +212,7 @@ nr_percentage_y2016 DOUBLE,
 nr_percentage_y2017 DOUBLE,
 PRIMARY KEY (Country_Name));
 
-LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Natural Resources Rent Percentage.csv'
+LOAD DATA LOCAL INFILE '/Users/xinqi/Desktop/Data Engineering 1/TERM Project/Data Sets/Natural_Resources_Rent_Percentage.csv'
 INTO TABLE natural_resources_percentage
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r'
@@ -228,6 +229,8 @@ nr_percentage_y2016 = nullif(@v_y2016, ''),
 nr_percentage_y2017 = nullif(@v_y2017, '');
 
 SELECT * FROM Countries.natural_resources_percentage;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ANALYTICS:
 -- 1. Q: What is the working age population with population and working age pop percentage in 2015?
@@ -457,7 +460,8 @@ DROP VIEW IF EXISTS High_GDP_Countries;
 	INNER JOIN GDP USING (ID)
 	WHERE Analytical_Countries.GDP_2015 > 57642914303
 	ORDER BY GDP_2015 DESC;
-    
+
+SELECT * FROM Countries.high_gdp_countries;
     
 DROP VIEW IF EXISTS Low_GDP_Countries;
 
@@ -471,7 +475,7 @@ AS
 WHERE Analytical_Countries.GDP_2015 < 57642914303 
 ORDER BY GDP_2015 ASC;
 
-
+SELECT * FROM Countries.low_gdp_countries;
 
 
 
